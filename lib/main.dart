@@ -28,7 +28,29 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LoginScreen(),
+      home: AuthenticationWrapper(),
     );
+  }
+}
+
+class AuthenticationWrapper extends StatefulWidget {
+  @override
+  _AuthenticationWrapperState createState() => _AuthenticationWrapperState();
+}
+
+class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
+  // Inicializa una instancia de FirebaseAuth
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    // Verifica el estado de autenticación al inicio de la aplicación
+    if (_auth.currentUser != null) {
+      // Si el usuario está autenticado, muestra la pantalla de inicio
+      return CodigoParaderoScreen();
+    } else {
+      // Si el usuario no está autenticado, redirige a la pantalla de inicio de sesión
+      return LoginScreen();
+    }
   }
 }
