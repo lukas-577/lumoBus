@@ -16,20 +16,19 @@ class GoogleMapWidget extends StatefulWidget {
 }
 
 class _GoogleMapWidgetState extends State<GoogleMapWidget> {
-
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
 
   void addCustomIcon() {
     BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(devicePixelRatio: 5.0), 
-        "assets/parada-de-autobus.png")
-      .then(
-        (icon) {
-          setState(() {
-            markerIcon = icon;
-          });
-        },
-      );
+            const ImageConfiguration(devicePixelRatio: 5.0),
+            "assets/parada-de-autobus.png")
+        .then(
+      (icon) {
+        setState(() {
+          markerIcon = icon;
+        });
+      },
+    );
   }
 
   late GoogleMapController _controller;
@@ -86,7 +85,6 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
       double lat = geometry['coordinates'][1];
       double lng = geometry['coordinates'][0];
 
-
       if (visibleRegion.contains(LatLng(lat, lng))) {
         if (properties['clasificac'] == 'ACTIVO') {
           markers.add(
@@ -107,6 +105,8 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
         }
       }
     });
+
+    //test
 
     setState(() {
       _markers = markers;
