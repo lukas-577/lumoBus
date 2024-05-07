@@ -52,6 +52,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        resValue "string", "google_maps_api_key", localProperties.getProperty('google.maps.key')
     }
 
     buildTypes {
@@ -60,6 +61,9 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+    }
+         applicationVariants.all { variant ->
+        variant.resValue "string", "google_maps_api_key", "\"${System.getenv("GOOGLE_MAPS_API_KEY")}\""
     }
 }
 

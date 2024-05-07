@@ -44,16 +44,15 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer <AuthProviderMi>(
-      builder: (context, provider, child) {
+    return Consumer<AuthProviderMi>(builder: (context, provider, child) {
       // Verifica el estado de autenticación al inicio de la aplicación
-    if (_auth.currentUser != null) {
-      // Si el usuario está autenticado, muestra la pantalla de inicio
-      return CodigoParaderoScreen();
-    } else {
-      // Si el usuario no está autenticado, redirige a la pantalla de inicio de sesión
-      return const LoginScreen();
-    }
-   });
+      if (_auth.currentUser != null) {
+        // Si el usuario está autenticado, muestra la pantalla de inicio
+        return CodigoParaderoScreen();
+      } else {
+        // Si el usuario no está autenticado, redirige a la pantalla de inicio de sesión
+        return const LoginScreen();
+      }
+    });
   }
 }
