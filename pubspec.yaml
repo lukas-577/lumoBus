@@ -42,6 +42,9 @@ dependencies:
   google_sign_in: ^6.2.1
   logger: ^2.2.0
   provider: ^6.1.2
+  google_maps_flutter: ^2.6.1
+  flutter_easyloading: ^3.0.5
+  geolocator: ^11.0.0
 
 dev_dependencies:
   flutter_test:
@@ -59,7 +62,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - assets/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

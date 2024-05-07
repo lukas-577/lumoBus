@@ -49,6 +49,7 @@ class ParaderoInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
+                      margin: EdgeInsets.only(bottom: 5.0),
                       padding: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         color: Colors.blueGrey[100],
@@ -63,12 +64,12 @@ class ParaderoInfo extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
                     Text(
                       '${paradero.name}',
                       style: TextStyle(fontSize: 18.0),
+                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 10.0),
                     Container(
                       padding: EdgeInsets.all(10.0),
                       height: 400, // Altura máxima del contenedor

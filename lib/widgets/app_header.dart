@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mibus/firebase/auth.dart';
+import 'package:provider/provider.dart';
 
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -18,7 +20,14 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: Icon(Icons.person),
           onPressed: () {
-            // Acción cuando se presiona el botón de usuario
+
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.exit_to_app_rounded),
+          onPressed: () {
+            // Llamar al método logout() al presionar el botón de persona
+            Provider.of<AuthProviderMi>(context, listen: false).logout();
           },
         ),
       ],

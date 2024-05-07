@@ -18,8 +18,8 @@ class LoginScreen extends StatelessWidget {
     };
 
     Map<String, String> _formData = {
-      'email': '',
-      'password': '',
+      'email': 'luk@gmail.com',
+      'password': '123456',
     };
 
     final emailController = TextEditingController(text: _formData['email']);
