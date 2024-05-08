@@ -8,7 +8,6 @@ import 'package:mibus/screens/paradero_info_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart'; // Importa la librería EasyLoading
 import 'package:mibus/services/location_service.dart';
 import 'package:geolocator/geolocator.dart';
-import 'dart:ui' as ui;
 
 class GoogleMapWidget extends StatefulWidget {
   @override
@@ -33,10 +32,9 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   }
 
   late GoogleMapController _controller;
-  final zoomThreshold = 15.0;
+  final zoomThreshold = 16.0;
   List<Marker> _markers = [];
   bool _locationPermissionGranted = false;
-  LatLng? _userLocation;
 
   @override
   void initState() {
@@ -50,7 +48,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
     return GoogleMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(-33.4372, -70.6506),
-        zoom: 11,
+        zoom: 10,
       ),
       onMapCreated: (GoogleMapController controller) {
         _controller = controller;

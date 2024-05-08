@@ -20,7 +20,6 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: Icon(Icons.person),
           onPressed: () {
-
           },
         ),
         IconButton(
