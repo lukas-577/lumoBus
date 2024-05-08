@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mibus/utils/gradient_background.dart';
 import 'package:mibus/widgets/app_header.dart';
+import 'package:mibus/widgets/bottom_nav_bar.dart';
 import 'package:mibus/widgets/codigo_paradero_form.dart';
 import 'package:mibus/widgets/google_maps.dart';
 
-class CodigoParaderoScreen extends StatelessWidget {
+class CodigoParaderoScreen extends StatefulWidget {
+  @override
+  _CodigoParaderoScreenState createState() => _CodigoParaderoScreenState();
+}
+
+class _CodigoParaderoScreenState extends State<CodigoParaderoScreen> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +56,18 @@ class CodigoParaderoScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+          // Navegación a la pantalla correspondiente según el índice seleccionado
+          if (index == 1) {
+            // Navegar a la pantalla de favoritos
+          }
+        },
       ),
     );
   }
