@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:convert';
@@ -10,11 +11,13 @@ import 'package:mibus/services/location_service.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GoogleMapWidget extends StatefulWidget {
+  const GoogleMapWidget({super.key});
+
   @override
-  _GoogleMapWidgetState createState() => _GoogleMapWidgetState();
+  GoogleMapWidgetState createState() => GoogleMapWidgetState();
 }
 
-class _GoogleMapWidgetState extends State<GoogleMapWidget> {
+class GoogleMapWidgetState extends State<GoogleMapWidget> {
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
 
   void addCustomIcon() {
@@ -45,7 +48,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      initialCameraPosition: CameraPosition(
+      initialCameraPosition: const CameraPosition(
         target: LatLng(-33.4372, -70.6506),
         zoom: 10,
       ),
@@ -76,7 +79,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
 
     final List<Marker> markers = [];
 
-    paraderos.forEach((paradero) {
+    for (var paradero in paraderos) {
       var properties = paradero['properties'];
       var geometry = paradero['geometry'];
 
@@ -102,7 +105,7 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
           );
         }
       }
-    });
+    }
 
     //test
 
@@ -135,7 +138,9 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
       EasyLoading
           .dismiss(); // Oculta el indicador de carga cuando se completan los datos
     } catch (error) {
-      print(error);
+      if (kDebugMode) {
+        print(error);
+      }
       EasyLoading
           .dismiss(); // Asegúrate de ocultar el indicador de carga en caso de error
     }

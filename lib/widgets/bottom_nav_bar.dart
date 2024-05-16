@@ -5,6 +5,7 @@ class BottomNavBar extends StatelessWidget {
   final Function(int) onTap;
 
   const BottomNavBar({
+    super.key,
     required this.currentIndex,
     required this.onTap,
   });
@@ -14,7 +15,7 @@ class BottomNavBar extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.directions_bus),
           label: 'Código Paradero',

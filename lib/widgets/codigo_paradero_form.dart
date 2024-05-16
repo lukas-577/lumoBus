@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mibus/services/api_service.dart'; // Importa el servicio de la API
 import 'package:mibus/models/paradero_model.dart'; // Importa la clase de modelo Paradero
@@ -6,13 +7,13 @@ import 'package:mibus/screens/paradero_info_screen.dart'; // Importa la ventana 
 class CodigoParaderoForm extends StatefulWidget {
   final void Function(String) onSubmit;
 
-  CodigoParaderoForm({Key? key, required this.onSubmit}) : super(key: key);
+  const CodigoParaderoForm({super.key, required this.onSubmit});
 
   @override
-  _CodigoParaderoFormState createState() => _CodigoParaderoFormState();
+  CodigoParaderoFormState createState() => CodigoParaderoFormState();
 }
 
-class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
+class CodigoParaderoFormState extends State<CodigoParaderoForm> {
   final TextEditingController _codigoController = TextEditingController();
   bool _isLoading = false;
 
@@ -32,7 +33,9 @@ class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
         ),
       );
     } catch (error) {
-      print(error);
+      if (kDebugMode) {
+        print(error);
+      }
     } finally {
       setState(() {
         _isLoading = false;
@@ -83,8 +86,8 @@ class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
             ),
             const SizedBox(height: 20.0),
             _isLoading
-                ? CircularProgressIndicator() // Muestra el loader si isLoading es true
-                : Container(
+                ? const CircularProgressIndicator() // Muestra el loader si isLoading es true
+                : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: ElevatedButton(
                       onPressed: () {

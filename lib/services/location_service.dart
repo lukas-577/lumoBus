@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
@@ -26,7 +27,9 @@ class LocationService {
       // Obtiene la posición actual del dispositivo.
       return await Geolocator.getCurrentPosition();
     } catch (e) {
-      print('Error al obtener la ubicación: $e');
+      if (kDebugMode) {
+        print('Error al obtener la ubicación: $e');
+      }
       return null;
     }
   }
@@ -39,7 +42,9 @@ class LocationService {
       }
       return true;
     } catch (e) {
-      print('Error al solicitar permisos de ubicación: $e');
+      if (kDebugMode) {
+        print('Error al solicitar permisos de ubicación: $e');
+      }
       return false;
     }
   }

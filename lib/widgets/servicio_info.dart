@@ -4,7 +4,7 @@ import 'package:mibus/models/paradero_model.dart';
 class ServicioInfo extends StatelessWidget {
   final Servicio servicio;
 
-  ServicioInfo({required this.servicio});
+  const ServicioInfo({super.key, required this.servicio});
 
   String getArrivalTimeText(int minArrivalTime, int maxArrivalTime) {
     if (maxArrivalTime <= 5) {
@@ -35,7 +35,7 @@ class ServicioInfo extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(
+            offset: const Offset(
                 0, 3), // Cambia la posición de la sombra según sea necesario
           ),
         ],
@@ -43,43 +43,47 @@ class ServicioInfo extends StatelessWidget {
       child: ListView(
         shrinkWrap: true,
         physics:
-            ClampingScrollPhysics(), // Para desactivar el scroll de la lista
+            const ClampingScrollPhysics(), // Para desactivar el scroll de la lista
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.directions_bus,
                 color: Colors.white,
                 size: 60.0,
               ),
-              SizedBox(width: 5.0),
+              const SizedBox(width: 5.0),
               Expanded(
                 flex: 3,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${servicio.id}',
-                      style: TextStyle(
+                      servicio.id,
+                      style: const TextStyle(
                           fontSize: 24.0,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                     if (servicio.valid)
                       Text(
-                        '${servicio.buses.isNotEmpty ? servicio.buses.first.id : ''}',
-                        style: TextStyle(fontSize: 12.0, color: Colors.white),
+                        servicio.buses.isNotEmpty
+                            ? servicio.buses.first.id
+                            : '',
+                        style: const TextStyle(
+                            fontSize: 12.0, color: Colors.white),
                       ),
                     if (servicio.valid)
                       Text(
                         'a ${servicio.buses.isNotEmpty ? servicio.buses.first.metersDistance : ''} mts.',
-                        style: TextStyle(fontSize: 12.0, color: Colors.white),
+                        style: const TextStyle(
+                            fontSize: 12.0, color: Colors.white),
                       ),
                   ],
                 ),
               ),
-              if (servicio.valid) SizedBox(width: 10.0),
+              if (servicio.valid) const SizedBox(width: 10.0),
               if (servicio.valid)
                 Expanded(
                   flex: 4,
@@ -97,7 +101,7 @@ class ServicioInfo extends StatelessWidget {
                                         servicio.buses.first.minArrivalTime,
                                         servicio.buses.first.maxArrivalTime)
                                     : '',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 18.0,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -116,8 +120,9 @@ class ServicioInfo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        servicio.statusDescription ?? '',
-                        style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        servicio.statusDescription,
+                        style: const TextStyle(
+                            fontSize: 18.0, color: Colors.white),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                       ),

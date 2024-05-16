@@ -14,14 +14,17 @@ void main() async {
   runApp(
     ChangeNotifierProvider<AuthProviderMi>(
       create: (_) => AuthProviderMi(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    debugPrint('MyApp build siendo llamada');
     return MaterialApp(
       title: 'Lumonidy Bus',
       builder: EasyLoading.init(),
@@ -30,17 +33,19 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: AuthenticationWrapper(),
+      home: const AuthenticationWrapper(),
     );
   }
 }
 
 class AuthenticationWrapper extends StatefulWidget {
+  const AuthenticationWrapper({super.key});
+
   @override
-  _AuthenticationWrapperState createState() => _AuthenticationWrapperState();
+  AuthenticationWrapperState createState() => AuthenticationWrapperState();
 }
 
-class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
+class AuthenticationWrapperState extends State<AuthenticationWrapper> {
   // Inicializa una instancia de FirebaseAuth
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -50,7 +55,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
       // Verifica el estado de autenticación al inicio de la aplicación
       if (_auth.currentUser != null) {
         // Si el usuario está autenticado, muestra la pantalla de inicio
-        return CodigoParaderoScreen();
+        return const CodigoParaderoScreen();
       } else {
         // Si el usuario no está autenticado, redirige a la pantalla de inicio de sesión
         return const LoginScreen();

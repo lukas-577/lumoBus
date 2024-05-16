@@ -47,6 +47,9 @@ dependencies:
   geolocator: ^11.0.0
   flutter_dotenv: ^5.1.0
   flutter_config: ^2.0.2
+  flutter_moving_background: ^0.0.5
+  font_awesome_flutter: ^10.7.0
+  sign_in_button: ^3.2.0
 
 dev_dependencies:
   flutter_test:

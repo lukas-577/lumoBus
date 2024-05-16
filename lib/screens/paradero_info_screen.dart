@@ -7,7 +7,7 @@ import 'package:mibus/widgets/servicio_info.dart'; // Importa el widget Servicio
 class ParaderoInfo extends StatelessWidget {
   final Paradero paradero;
 
-  ParaderoInfo({required this.paradero});
+  const ParaderoInfo({super.key, required this.paradero});
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +20,20 @@ class ParaderoInfo extends StatelessWidget {
             : 1);
 
     return Scaffold(
-      appBar: AppHeader(),
+      appBar: const AppHeader(
+        isSecondary: true,
+      ),
       body: Stack(
         children: [
           GradientBackground(
             child: Container(),
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Center(
               child: Container(
                 height: 600,
-                padding: EdgeInsets.all(30.0),
+                padding: const EdgeInsets.all(30.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15.0),
@@ -40,7 +42,7 @@ class ParaderoInfo extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -49,15 +51,15 @@ class ParaderoInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(bottom: 5.0),
-                      padding: EdgeInsets.all(10.0),
+                      margin: const EdgeInsets.only(bottom: 5.0),
+                      padding: const EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         color: Colors.blueGrey[100],
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Text(
                         'Paradero ${paradero.id}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -65,13 +67,13 @@ class ParaderoInfo extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${paradero.name}',
-                      style: TextStyle(fontSize: 18.0),
+                      paradero.name,
+                      style: const TextStyle(fontSize: 18.0),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     Container(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       height: 400, // Altura máxima del contenedor
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blueGrey[100]!),
