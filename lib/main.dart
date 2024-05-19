@@ -6,6 +6,7 @@ import 'package:mibus/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:mibus/firebase/auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,44 +14,52 @@ void main() async {
   runApp(
     ChangeNotifierProvider<AuthProviderMi>(
       create: (_) => AuthProviderMi(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    debugPrint('MyApp build siendo llamada');
     return MaterialApp(
       title: 'Lumonidy Bus',
+      builder: EasyLoading.init(),
       theme: ThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: AuthenticationWrapper(),
+      home: const AuthenticationWrapper(),
     );
   }
 }
 
 class AuthenticationWrapper extends StatefulWidget {
+  const AuthenticationWrapper({super.key});
+
   @override
-  _AuthenticationWrapperState createState() => _AuthenticationWrapperState();
+  AuthenticationWrapperState createState() => AuthenticationWrapperState();
 }
 
-class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
+class AuthenticationWrapperState extends State<AuthenticationWrapper> {
   // Inicializa una instancia de FirebaseAuth
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
-    // Verifica el estado de autenticación al inicio de la aplicación
-    if (_auth.currentUser != null) {
-      // Si el usuario está autenticado, muestra la pantalla de inicio
-      return CodigoParaderoScreen();
-    } else {
-      // Si el usuario no está autenticado, redirige a la pantalla de inicio de sesión
-      return LoginScreen();
-    }
+    return Consumer<AuthProviderMi>(builder: (context, provider, child) {
+      // Verifica el estado de autenticación al inicio de la aplicación
+      if (_auth.currentUser != null) {
+        // Si el usuario está autenticado, muestra la pantalla de inicio
+        return const CodigoParaderoScreen();
+      } else {
+        // Si el usuario no está autenticado, redirige a la pantalla de inicio de sesión
+        return const LoginScreen();
+      }
+    });
   }
 }

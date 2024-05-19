@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mibus/services/api_service.dart'; // Importa el servicio de la API
 import 'package:mibus/models/paradero_model.dart'; // Importa la clase de modelo Paradero
@@ -6,13 +7,13 @@ import 'package:mibus/screens/paradero_info_screen.dart'; // Importa la ventana 
 class CodigoParaderoForm extends StatefulWidget {
   final void Function(String) onSubmit;
 
-  CodigoParaderoForm({Key? key, required this.onSubmit}) : super(key: key);
+  const CodigoParaderoForm({super.key, required this.onSubmit});
 
   @override
-  _CodigoParaderoFormState createState() => _CodigoParaderoFormState();
+  CodigoParaderoFormState createState() => CodigoParaderoFormState();
 }
 
-class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
+class CodigoParaderoFormState extends State<CodigoParaderoForm> {
   final TextEditingController _codigoController = TextEditingController();
   bool _isLoading = false;
 
@@ -32,7 +33,9 @@ class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
         ),
       );
     } catch (error) {
-      print(error);
+      if (kDebugMode) {
+        print(error);
+      }
     } finally {
       setState(() {
         _isLoading = false;
@@ -47,8 +50,8 @@ class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
         FocusScope.of(context).unfocus();
       },
       child: Container(
-        height: 300,
-        padding: EdgeInsets.all(30.0),
+        height: 260,
+        padding: const EdgeInsets.all(30.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15.0),
@@ -57,34 +60,34 @@ class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Ingrese el código de paradero:',
               style: TextStyle(fontSize: 18.0),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             TextField(
               controller: _codigoController,
               decoration: InputDecoration(
-                hintText: 'Código de paradero',
+                hintText: 'Buscar paradero',
                 filled: true,
                 fillColor: Colors.blueGrey[50],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: const TextStyle(color: Colors.grey),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             _isLoading
-                ? CircularProgressIndicator() // Muestra el loader si isLoading es true
-                : Container(
+                ? const CircularProgressIndicator() // Muestra el loader si isLoading es true
+                : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: ElevatedButton(
                       onPressed: () {
@@ -94,11 +97,11 @@ class _CodigoParaderoFormState extends State<CodigoParaderoForm> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
                       ),
                       child: Text(
                         'Buscar'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Colors.white),

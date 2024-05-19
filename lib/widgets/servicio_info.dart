@@ -4,7 +4,7 @@ import 'package:mibus/models/paradero_model.dart';
 class ServicioInfo extends StatelessWidget {
   final Servicio servicio;
 
-  ServicioInfo({required this.servicio});
+  const ServicioInfo({super.key, required this.servicio});
 
   String getArrivalTimeText(int minArrivalTime, int maxArrivalTime) {
     if (maxArrivalTime <= 5) {
@@ -51,7 +51,7 @@ class ServicioInfo extends StatelessWidget {
               const Icon(
                 Icons.directions_bus,
                 color: Colors.white,
-                size: 70.0,
+                size: 60.0,
               ),
               const SizedBox(width: 5.0),
               Expanded(
@@ -60,23 +60,25 @@ class ServicioInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${servicio.id}',
+                      servicio.id,
                       style: const TextStyle(
-                          fontSize: 26.0,
+                          fontSize: 24.0,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                     if (servicio.valid)
                       Text(
-                        '${servicio.buses.isNotEmpty ? servicio.buses.first.id : ''}',
+                        servicio.buses.isNotEmpty
+                            ? servicio.buses.first.id
+                            : '',
                         style: const TextStyle(
-                            fontSize: 14.0, color: Colors.white),
+                            fontSize: 12.0, color: Colors.white),
                       ),
                     if (servicio.valid)
                       Text(
                         'a ${servicio.buses.isNotEmpty ? servicio.buses.first.metersDistance : ''} mts.',
                         style: const TextStyle(
-                            fontSize: 14.0, color: Colors.white),
+                            fontSize: 12.0, color: Colors.white),
                       ),
                   ],
                 ),
@@ -100,7 +102,7 @@ class ServicioInfo extends StatelessWidget {
                                         servicio.buses.first.maxArrivalTime)
                                     : '',
                                 style: const TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 18.0,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -118,8 +120,9 @@ class ServicioInfo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        servicio.statusDescription ?? '',
-                        style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        servicio.statusDescription,
+                        style: const TextStyle(
+                            fontSize: 18.0, color: Colors.white),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                       ),
