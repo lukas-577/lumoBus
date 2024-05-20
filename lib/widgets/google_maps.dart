@@ -19,6 +19,17 @@ class GoogleMapWidget extends StatefulWidget {
 
 class GoogleMapWidgetState extends State<GoogleMapWidget> {
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+  late GoogleMapController _controller;
+  final zoomThreshold = 16.0;
+  List<Marker> _markers = [];
+  bool _locationPermissionGranted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    addCustomIcon();
+    _requestLocationPermission();
+  }
 
   void addCustomIcon() {
     BitmapDescriptor.fromAssetImage(
@@ -33,18 +44,6 @@ class GoogleMapWidgetState extends State<GoogleMapWidget> {
     );
   }
 
-  late GoogleMapController _controller;
-  final zoomThreshold = 16.0;
-  List<Marker> _markers = [];
-  bool _locationPermissionGranted = false;
-
-  @override
-  void initState() {
-    super.initState();
-    addCustomIcon();
-    _requestLocationPermission();
-  }
-
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
@@ -54,6 +53,7 @@ class GoogleMapWidgetState extends State<GoogleMapWidget> {
       ),
       onMapCreated: (GoogleMapController controller) {
         _controller = controller;
+        _setMapStyle(controller);
       },
       myLocationButtonEnabled: _locationPermissionGranted,
       myLocationEnabled: _locationPermissionGranted,
@@ -107,8 +107,6 @@ class GoogleMapWidgetState extends State<GoogleMapWidget> {
       }
     }
 
-    //test
-
     setState(() {
       _markers = markers;
     });
@@ -117,7 +115,6 @@ class GoogleMapWidgetState extends State<GoogleMapWidget> {
         .dismiss(); // Oculta el indicador de carga cuando se completa la carga
   }
 
-  // Función para obtener los datos del paradero
   Future<void> obtenerDatosParadero(
       String codigoParadero, BuildContext context) async {
     try {
@@ -164,5 +161,10 @@ class GoogleMapWidgetState extends State<GoogleMapWidget> {
           LatLng(userPosition.latitude, userPosition.longitude);
       _controller.animateCamera(CameraUpdate.newLatLngZoom(userLatLng, 16));
     }
+  }
+
+  void _setMapStyle(GoogleMapController controller) async {
+    String style = await rootBundle.loadString('assets/map_style.json');
+    controller.setMapStyle(style);
   }
 }

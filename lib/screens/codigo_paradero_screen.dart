@@ -20,11 +20,6 @@ class CodigoParaderoScreenState extends State<CodigoParaderoScreen> {
       appBar: const AppHeader(),
       body: Stack(
         children: [
-          // Fondo de gradiente
-          GradientBackground(
-            child: Container(),
-          ),
-          // Mapa de Google
           const Positioned.fill(
             child: GoogleMapWidget(),
           ),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mibus/widgets/custom_elevated_button.dart';
 import 'package:provider/provider.dart';
 import 'package:mibus/firebase/auth.dart';
 import 'package:flutter_moving_background/enums/animation_types.dart';
 import 'package:flutter_moving_background/flutter_moving_background.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -39,8 +37,18 @@ class LoginScreen extends StatelessWidget {
                 formData['password']!,
               );
             },
-            backgroundColor: Colors.blueGrey.shade500,
+            backgroundColor: Colors.greenAccent.shade400,
+            padding: const EdgeInsets.all(15),
           ),
+          SizedBox(height: 10),
+          SignInButton(
+            Buttons.google,
+            text: "Sign up with Google",
+            onPressed: () {},
+            padding:
+                const EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 5),
+          ),
+          SizedBox(height: 10),
           SignInButtonBuilder(
             text: 'Registrarse',
             icon: Icons.person_add,
@@ -51,12 +59,8 @@ class LoginScreen extends StatelessWidget {
               );
             },
             backgroundColor: Colors.blueGrey.shade500,
+            padding: const EdgeInsets.all(15),
           ),
-          SignInButton(
-            Buttons.google,
-            text: "Sign up with Google",
-            onPressed: () {},
-          )
         ],
       );
     }
@@ -84,7 +88,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: SingleChildScrollView(
                     child: Container(
                       padding: const EdgeInsets.all(
@@ -106,35 +110,42 @@ class LoginScreen extends StatelessWidget {
                             height: 120, // Ajusta la altura según sea necesario
                           ),
                           const SizedBox(height: 30),
-                          TextField(
-                            controller: emailController,
-                            decoration: InputDecoration(
-                              labelText: 'Email',
-                              filled: true,
-                              fillColor: Colors.grey[250],
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30, right: 30),
+                            child: Column(
+                              children: [
+                                TextField(
+                                  controller: emailController,
+                                  decoration: InputDecoration(
+                                    labelText: 'Email',
+                                    filled: true,
+                                    fillColor: Colors.grey[250],
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  onChanged: (value) {
+                                    formData['email'] = value;
+                                  },
+                                ),
+                                const SizedBox(height: 20),
+                                TextField(
+                                  controller: passwordController,
+                                  decoration: InputDecoration(
+                                    labelText: 'Password',
+                                    filled: true,
+                                    fillColor: Colors.grey[250],
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  onChanged: (value) {
+                                    formData['password'] = value;
+                                  },
+                                  obscureText: true,
+                                ),
+                              ],
                             ),
-                            onChanged: (value) {
-                              formData['email'] = value;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          TextField(
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              filled: true,
-                              fillColor: Colors.grey[250],
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                            onChanged: (value) {
-                              formData['password'] = value;
-                            },
-                            obscureText: true,
                           ),
                           const SizedBox(height: 20),
                           Padding(
